@@ -31,25 +31,50 @@
 
 (require 'seq)
 
+(defconst pandemic-table-headline "cities"
+  "The headline containing the cities table.")
+
 (defun pandemic--get-cities ()
   "Get the full list of cities."
   (save-excursion
     (let (field cities)
-      (goto-char (org-find-exact-headline-in-buffer "cities"))
-      (forward-line 2)
+      (goto-char (org-find-exact-headline-in-buffer pandemic-table-headline))
+      (forward-line 7)
       (while (org-at-table-p)
         (forward-char 2)
         (setq field (string-trim (org-table-get-field)))
-        (if (not (or (seq-contains field ?-)
-                     (string= field "City")))
+        (if (not (seq-contains field ?-))
             (setq cities (cons field cities)))
         (forward-line))
       (message "cities %s" cities)
       cities)))
 
+(defun pandemic-reset ()
+  "Reset the buffer for a new game."
+  (interactive)
+  (save-excursion
+    (let ((inhibit-read-only t)
+          (pos (org-find-exact-headline-in-buffer pandemic-table-headline)))
+      ;; reset infection rate
+      (goto-char pos)
+      (org-entry-put pos "infection-step" "1")
+      (org-entry-put pos "infection-rate" "2")
+
+      ;; clear hlines
+      (forward-line 8)
+      (while (replace-regexp "^[-\+\|]+\n" ""))
+
+      ;; add an hline at the bottom
+      (goto-char pos)
+      (forward-line 8)
+      (while (save-excursion
+               (forward-line)
+               (org-at-table-p))
+        (forward-line))
+      (org-table-insert-hline))))
+
 (defun pandemic-infect ()
-  "Infect a city.
-Prompts for the city to infect."
+  "Infect a city.  Prompts for the city to infect."
   (interactive)
   (save-excursion
     (let ((inhibit-read-only t)
@@ -67,8 +92,8 @@ Prompts for the city to infect."
 Add an hline at the bottom of the table to mark off where the infection deck was reshuffled."
   (interactive)
   (save-excursion
-    (goto-char (org-find-exact-headline-in-buffer "cities"))
-    (forward-line)
+    (goto-char (org-find-exact-headline-in-buffer pandemic-table-headline))
+    (forward-line 7)
     (while (save-excursion
              (forward-line)
              (org-at-table-p))
@@ -79,14 +104,15 @@ Add an hline at the bottom of the table to mark off where the infection deck was
 
 (defun pandemic--compute-prob ()
   "Fill probabilities in to the table."
-  (goto-char (org-find-exact-headline-in-buffer "cities"))
-  (forward-line 2)
+  (goto-char (org-find-exact-headline-in-buffer pandemic-table-headline))
+  (forward-line 7)
   (forward-char 2)
   (let ((inhibit-read-only t)
-        (infection-rate (string-to-number (org-entry-get (point-min) "infection-rate")))
+        (infection-rate (string-to-number (org-entry-get (org-find-exact-headline-in-buffer pandemic-table-headline)
+                                                         "infection-rate")))
         (separator-count 0)
         line-num separators
-        bottom next-bottom)
+        very-bottom next-bottom)
     ;; find separators
     (while (save-excursion
              (forward-line)
@@ -108,7 +134,7 @@ Add an hline at the bottom of the table to mark off where the infection deck was
         (dolist (turn (number-sequence 1 5))
           (setq prob (pandemic--calc-prob very-bottom next-bottom top bottom turn infection-rate separator-count))
           (dolist (line (number-sequence top bottom))
-            (goto-line line)
+            (forward-line (- line (line-number-at-pos))) ; (goto-line line)
             (forward-char 2)
             (org-table-goto-column (1+ turn))
             (org-table-blank-field)
@@ -134,20 +160,21 @@ Add an hline at the bottom of the table to mark off where the infection deck was
 (defun pandemic--increment-rate ()
   "Increment the infection rate."
   (let* ((inhibit-read-only t)
-         (infection-step (1+ (string-to-number (org-entry-get (point-min) "infection-step"))))
+         (pos (org-find-exact-headline-in-buffer pandemic-table-headline))
+         (infection-step (1+ (string-to-number (org-entry-get pos "infection-step"))))
          (infection-rate (or (nth infection-step
-                                  (org-entry-get-multivalued-property (point-min) "infection-rate-schedule"))
+                                  (org-entry-get-multivalued-property pos "infection-rate-schedule"))
                              "4")))
-    (org-entry-put (point-min) "infection-step" (number-to-string infection-step))
-    (org-entry-put (point-min) "infection-rate" infection-rate)
-))
+    (org-entry-put pos "infection-step" (number-to-string infection-step))
+    (org-entry-put pos "infection-rate" infection-rate)))
 
 ;;;###autoload
 (define-minor-mode pandemic-mode "Toggle Pandemic mode."
   :init-value nil
   :lighter " pandemic"
   :keymap
-  `((,(kbd "i") . pandemic-infect)
+  `((,(kbd "r") . pandemic-reset)
+    (,(kbd "i") . pandemic-infect)
     (,(kbd "e") . pandemic-epidemic))
   :group 'pandemic
   (read-only-mode t))

@@ -1,0 +1,45 @@
+* Pandemic
+** Overview
+
+[[http://www.gnu.org/software/emacs/][Emacs]] is a text editor.  An extensible one.  It is mainly used for
+coding, but it can also do anything else.
+
+[[https://github.com/ianxm/pandemic.el][pandemic.el]] is meant to be used while playing the [[https://www.zmangames.com/en/games/pandemic/][pandemic board
+game]].  It helps keep track of which cities are most likely to be
+infected in the next few turns.
+
+Here is a screenshot.  The "Turn 1" column gives the probability any
+city will be chosen on the next turn.  "Turn 2" is for the following
+turn, and so on.
+
+[[https://ianxm-githubfiles.s3.amazonaws.com/pandemic.el/pandemic.png]]
+
+** Installation
+
+1. download [[https://raw.githubusercontent.com/ianxm/pandemic.el/main/pandemic.el][pandemic.el]]
+2. run @@html:<kbd>@@M-x@@html:</kbd>@@ ~package-install-file~ @@html:<kbd>@@RET@@html:</kbd>@@
+3. choose ~pandemic.el~
+
+** Usage
+
+*** Keys
+
+- @@html:<kbd>@@r@@html:</kbd>@@ :: reset the buffer for a new game
+- @@html:<kbd>@@i@@html:</kbd>@@ :: infect a city
+- @@html:<kbd>@@e@@html:</kbd>@@ :: mark off that there was an epidemic
+
+*** How To
+
+Open pandemic.org.  It should put itself in pandemic mode, which
+provides the above key bindings.
+
+Hit @@html:<kbd>@@r@@html:</kbd>@@ to reset the buffer to play a new game.
+
+Each time a new card is drawn from the infection deck, hit
+@@html:<kbd>@@i@@html:</kbd>@@ and enter the city.  If you use an
+completion package such as ivy or ido then you'll only have to type a
+few key strokes.
+
+Each time an epidemic card is drawn hit @@html:<kbd>@@e@@html:</kbd>@@.
+
+That's it.

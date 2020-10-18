@@ -1,57 +1,60 @@
-:PROPERTIES:
-:infection-step: 1
-:infection-rate-schedule: 2 2 2 3 3 4 4
-:infection-rate: 2
-:END:
 ;;; -*- eval: (pandemic-mode t) -*-
 * cities
+:PROPERTIES:
+:infection-step: 3
+:infection-rate-schedule: 2 2 2 3 3 4 4
+:infection-rate: 3
+:END:
 | City             | Turn 1 | Turn 2 | Turn 3 | Turn 4 | Turn 5 |
 |------------------+--------+--------+--------+--------+--------|
 | Bangkok          |      0 |      0 |      0 |      0 |      0 |
 | Beijing          |      0 |      0 |      0 |      0 |      0 |
-| Bogota           |      0 |      0 |      0 |      0 |      0 |
 | Buenos Aires     |      0 |      0 |      0 |      0 |      0 |
 | Cairo            |      0 |      0 |      0 |      0 |      0 |
 | Chennai          |      0 |      0 |      0 |      0 |      0 |
 | Chicago          |      0 |      0 |      0 |      0 |      0 |
 | Delhi            |      0 |      0 |      0 |      0 |      0 |
 | Essen            |      0 |      0 |      0 |      0 |      0 |
-| Hong Kong        |      0 |      0 |      0 |      0 |      0 |
-| Karachi          |      0 |      0 |      0 |      0 |      0 |
 | Khartoum         |      0 |      0 |      0 |      0 |      0 |
-| Kinshasa         |      0 |      0 |      0 |      0 |      0 |
 | Kolkata          |      0 |      0 |      0 |      0 |      0 |
-| Lagos            |      0 |      0 |      0 |      0 |      0 |
-| Madrid           |      0 |      0 |      0 |      0 |      0 |
-| Manilla          |      0 |      0 |      0 |      0 |      0 |
-| Mexico City      |      0 |      0 |      0 |      0 |      0 |
-| Miami            |      0 |      0 |      0 |      0 |      0 |
-| Milan            |      0 |      0 |      0 |      0 |      0 |
-| Montreal         |      0 |      0 |      0 |      0 |      0 |
-| Paris            |      0 |      0 |      0 |      0 |      0 |
-| Riyadh           |      0 |      0 |      0 |      0 |      0 |
 | San Francisco    |      0 |      0 |      0 |      0 |      0 |
-| Sao Paulo        |      0 |      0 |      0 |      0 |      0 |
-| St Petersburg    |      0 |      0 |      0 |      0 |      0 |
-| Washington       |      0 |      0 |      0 |      0 |      0 |
-| Tehran           |      0 |      0 |      0 |      0 |      0 |
-| New York         |      0 |      0 |      0 |      0 |      0 |
-| Los Angeles      |      0 |      0 |      0 |      0 |      0 |
-| Algiers          |      0 |      0 |      0 |      0 |      0 |
-| Shanghai         |      0 |      0 |      0 |      0 |      0 |
-| Osaka            |      0 |      0 |      0 |      0 |      0 |
-| Baghdad          |      0 |      0 |      0 |      0 |      0 |
-| Jakarta          |      0 |      0 |      0 |      0 |      0 |
-| Santiago         |      0 |      0 |      0 |      0 |      0 |
-| Johannesburg     |      0 |      0 |      0 |      0 |      0 |
 | Moscow           |      0 |      0 |      0 |      0 |      0 |
-| Sydney           |      0 |      0 |      0 |      0 |      0 |
+| Montreal         |      0 |      0 |      0 |      0 |      0 |
 | Atlanta          |      0 |      0 |      0 |      0 |      0 |
-| Ho Chi Minh City |      0 |      0 |      0 |      0 |      0 |
-| London           |      0 |      0 |      0 |      0 |      0 |
 | Lima             |      0 |      0 |      0 |      0 |      0 |
-| Seoul            |      0 |      0 |      0 |      0 |      0 |
 | Istanbul         |      0 |      0 |      0 |      0 |      0 |
-| Tokyo            |      0 |      0 |      0 |      0 |      0 |
-| Taipei           |      0 |      0 |      0 |      0 |      0 |
+| Manilla          |      0 |      0 |      0 |      0 |      0 |
+| Tehran           |      0 |      0 |      0 |      0 |      0 |
+| London           |      0 |      0 |      0 |      0 |      0 |
+| Milan            |      0 |      0 |      0 |      0 |      0 |
+| St Petersburg    |      0 |      0 |      0 |      0 |      0 |
+| Mexico City      |      0 |      0 |      0 |      0 |      0 |
+| Seoul            |      0 |      0 |      0 |      0 |      0 |
+|------------------+--------+--------+--------+--------+--------|
+| Baghdad          |      0 |      0 |     12 |     50 |     88 |
+| Paris            |      0 |      0 |     12 |     50 |     88 |
+| Taipei           |      0 |      0 |     12 |     50 |     88 |
+| Johannesburg     |      0 |      0 |     12 |     50 |     88 |
+| Madrid           |      0 |      0 |     12 |     50 |     88 |
+| New York         |      0 |      0 |     12 |     50 |     88 |
+| Los Angeles      |      0 |      0 |     12 |     50 |     88 |
+| Tokyo            |      0 |      0 |     12 |     50 |     88 |
+|------------------+--------+--------+--------+--------+--------|
+| Lagos            |     38 |     75 |    100 |    100 |    100 |
+| Jakarta          |     38 |     75 |    100 |    100 |    100 |
+| Ho Chi Minh City |     38 |     75 |    100 |    100 |    100 |
+| Algiers          |     38 |     75 |    100 |    100 |    100 |
+| Shanghai         |     38 |     75 |    100 |    100 |    100 |
+| Bogota           |     38 |     75 |    100 |    100 |    100 |
+| Riyadh           |     38 |     75 |    100 |    100 |    100 |
+| Hong Kong        |     38 |     75 |    100 |    100 |    100 |
+|------------------+--------+--------+--------+--------+--------|
+| Osaka            |      0 |      0 |      0 |      0 |      0 |
+| Santiago         |      0 |      0 |      0 |      0 |      0 |
+| Sao Paulo        |      0 |      0 |      0 |      0 |      0 |
+| Washington       |      0 |      0 |      0 |      0 |      0 |
+| Karachi          |      0 |      0 |      0 |      0 |      0 |
 | Mumbai           |      0 |      0 |      0 |      0 |      0 |
+| Kinshasa         |      0 |      0 |      0 |      0 |      0 |
+| Sydney           |      0 |      0 |      0 |      0 |      0 |
+| Miami            |      0 |      0 |      0 |      0 |      0 |
