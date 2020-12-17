@@ -62,7 +62,8 @@
 
       ;; clear hlines
       (forward-line 8)
-      (while (replace-regexp "^[-\+\|]+\n" ""))
+      (while (re-search-forward "^[-\+\|]+\n" nil t)
+        (replace-match ""))
 
       ;; add an hline at the bottom
       (goto-char pos)
@@ -162,7 +163,7 @@ Add an hline at the bottom of the table to mark off where the infection deck was
   (let* ((inhibit-read-only t)
          (pos (org-find-exact-headline-in-buffer pandemic-table-headline))
          (infection-step (1+ (string-to-number (org-entry-get pos "infection-step"))))
-         (infection-rate (or (nth infection-step
+         (infection-rate (or (nth (1- infection-step)
                                   (org-entry-get-multivalued-property pos "infection-rate-schedule"))
                              "4")))
     (org-entry-put pos "infection-step" (number-to-string infection-step))
